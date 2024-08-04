@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  lms:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./books.json:/app/books.json
+    environment:
+      - FLASK_ENV=development
