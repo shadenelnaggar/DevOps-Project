@@ -32,3 +32,5 @@ variable "desired_capacity" {
   description = "The desired number of worker nodes"
   default     = 1
 }
+
+

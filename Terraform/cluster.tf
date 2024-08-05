@@ -33,9 +33,33 @@ resource "aws_iam_role" "team2_eks_role" {
 
   tags = {
     Name = "team2-eks-role"
-     
   }
 }
+
+resource "aws_security_group" "eks_control_plane_sg" {
+  name        = "t2_eks_control_plane_sg"
+  description = "Security group for EKS control plane"
+  vpc_id      = aws_vpc.team_vpc.id
+
+  ingress {
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "t2_eks_control_plane_sg"
+  }
+}
+
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
   role       = aws_iam_role.team2_eks_role.name
@@ -60,4 +84,9 @@ resource "aws_iam_role_policy_attachment" "ecr_read_only_policy" {
 resource "aws_iam_role_policy_attachment" "team2_vpc_policy_attachment" {
   role       = aws_iam_role.team2_eks_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+}
+
+resource "aws_iam_role_policy_attachment" "eks_admin_access_policy_" {
+  role       = aws_iam_role.team2_eks_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }

@@ -38,7 +38,6 @@ resource "aws_iam_role" "team2_node_role" {
 
   tags = {
     Name = "team2-node-role"
-     
   }
 }
 
@@ -61,6 +60,10 @@ resource "aws_iam_role_policy_attachment" "ec2_full_access_policy" {
   role       = aws_iam_role.team2_node_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 }
+resource "aws_iam_role_policy_attachment" "node_admin_access_policy" {
+  role       = aws_iam_role.team2_node_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
 
 resource "aws_security_group" "eks_nodes_sg" {
   vpc_id = aws_vpc.team2_vpc.id
@@ -72,12 +75,12 @@ resource "aws_security_group" "eks_nodes_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-#   ingress {
-#     from_port   = 5000
-#     to_port     = 5000
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
+  ingress {
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0

@@ -26,7 +26,7 @@ resource "aws_subnet" "team2_public_subnet" {
 resource "aws_subnet" "team2_private_subnet" {
   vpc_id            = aws_vpc.team2_vpc.id
   cidr_block        = var.private_subnet_cidr
-  availability_zone = "${var.region}c"
+  availability_zone = "${var.region}a"
 
   tags = {
     Name = "team2-private-subnet"
@@ -93,3 +93,6 @@ resource "aws_route_table_association" "team2_private_rt_assoc" {
   subnet_id      = aws_subnet.team2_private_subnet.id
   route_table_id = aws_route_table.team2_private_rt.id
 }
+
+//eks control plane sec group
+
