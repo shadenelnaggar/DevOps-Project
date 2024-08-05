@@ -26,7 +26,7 @@ resource "aws_subnet" "team2_public_subnet" {
 resource "aws_subnet" "team2_private_subnet" {
   vpc_id            = aws_vpc.team2_vpc.id
   cidr_block        = var.private_subnet_cidr
-  availability_zone = "${var.region}a"
+  availability_zone = "${var.region}b"
 
   tags = {
     Name = "team2-private-subnet"

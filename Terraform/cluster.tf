@@ -39,7 +39,7 @@ resource "aws_iam_role" "team2_eks_role" {
 resource "aws_security_group" "eks_control_plane_sg" {
   name        = "t2_eks_control_plane_sg"
   description = "Security group for EKS control plane"
-  vpc_id      = aws_vpc.team_vpc.id
+  vpc_id      = aws_vpc.team2_vpc.id
 
   ingress {
     from_port   = 5000
