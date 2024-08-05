@@ -31,7 +31,7 @@ output "public_subnet_a_id" {
   value = aws_subnet.team2_public_subnet.id
 }
 
-output "public_subnet_a_id" {
+output "private_subnet_a_id" {
   value = aws_subnet.team2_private_subnet.id
 }
 
