@@ -1,11 +1,13 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
-  name: lms-app-pvc
+  name: my-lms-storage-pv
   namespace: teamtwo
 spec:
+  capacity:
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+  hostPath:
+    path: /app/data
+  storageClassName: manual

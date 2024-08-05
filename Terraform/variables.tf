@@ -20,7 +20,7 @@ variable "private_subnet_cidr" {
 
 variable "cluster_name" {
   description = "The name of the EKS cluster"
-  default     = "team2-cluster"
+  default     = "team2_cluster_2"
 }
 
 variable "node_instance_type" {

@@ -1,26 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lms-app
+  name: team-two-app
+  namespace: teamtwo
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: lms-app
+      app: team-two-app
   template:
     metadata:
       labels:
-        app: lms-app
+        app: team-two-app
     spec:
       containers:
-      - name: lms-app
-        image: shadenelnaggar/devops-project:latest
+      - name: team-two-app
+        image: shadenelnaggar/finalproject:latest
         ports:
         - containerPort: 5000
         volumeMounts:
-        - name: lms-storage
+        - name: my-lms-storage
           mountPath: /app/data
       volumes:
-      - name: lms-storage
+      - name: my-lms-storage
         persistentVolumeClaim:
-          claimName: lms-pvc
+          claimName: my-lms-storage-pvc
